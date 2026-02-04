@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.1",
     "dayjs": "^1.11.19",
+    "globals": "^17.3.0",
     "sharp": "^0.34.3",
     "tailwindcss": "^4.1.18"
   },
@@ -23,6 +24,7 @@
     "@shikijs/transformers": "^3.22.0",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
