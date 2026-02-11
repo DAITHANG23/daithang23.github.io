@@ -1,9 +1,9 @@
 name: Deploy Astro Site to GitHub Pages
 
-#on:
-#  push:
-#    branches:
-#    - main
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -32,3 +32,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: gh-pages
+          enable_jekyll: false
