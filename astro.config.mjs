@@ -9,7 +9,6 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   output: 'static',
   site: 'https://daithang23.github.io',
-  base: '/domcoding-blog/',
   integrations: [mdx(), sitemap()],
 
   vite: {
