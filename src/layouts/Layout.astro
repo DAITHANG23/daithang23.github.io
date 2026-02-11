@@ -1,0 +1,46 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { ClientRouter } from "astro:transitions";
+// type Props = CollectionEntry<'blog'>['data'];
+export interface Props {
+  title: string;
+  author?: string;
+  profile?: string;
+  description: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  pubDatetime?: Date;
+  modDatetime?: Date | null;
+  scrollSmooth?: boolean;
+  pubDate?: Date;
+  updatedDate?: Date | null;
+  heroImage?: any;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+    <ClientRouter />
+
+    <script is:inline src="/toggle-theme.js"></script>
+  </head>
+
+  <body class="app-prose !w-full">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script is:inline data-astro-rerun>
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>

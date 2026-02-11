@@ -1,0 +1,40 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "./Layout.astro";
+
+// type Props = CollectionEntry<'blog'>['data'];
+
+export interface Props {
+  title: string;
+  author?: string;
+  profile?: string;
+  description: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  pubDatetime?: Date;
+  modDatetime?: Date | null;
+  scrollSmooth?: boolean;
+  pubDate: Date;
+  updatedDate?: Date | null;
+  heroImage?: any;
+}
+
+const { title, description } = Astro.props;
+---
+
+<Layout title={title} description={description}
+  ><body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body></Layout
+>
+
+<script is:inline data-astro-rerun>
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>
