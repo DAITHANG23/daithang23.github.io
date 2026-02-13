@@ -1,15 +1,25 @@
 ---
+import Avatar from "@/components/Avatar.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <div class="mx-auto p-4">
-    <h1 class="text-primary-text">🧑‍🚀 Hello, Astronaut!</h1>
-    <p>
-      Welcome to the official <a href="https://astro.build/" class="text-primary underline">Astro</a
-      > blog starter template. This template serves as a lightweight, minimally-styled starting point
-      for anyone looking to build a personal website, blog, or portfolio with Astro.
-    </p>
+  <div
+    class="mx-auto grid grid-cols-1 items-center justify-center gap-4 p-4 sm:grid-cols-2 sm:justify-between lg:gap-[7rem]"
+  >
+    <div class="w-full">
+      <h1 class="text-primary-text mb-4">
+        Hello, <span class="text-primary">I’m </span>
+      </h1>
+      <h1 class="text-primary mb-4">Thang(Dom) Nguyen</h1>
+      <h5>A Full-Stack Engineer</h5>
+      <p>
+        The Dom Nguyen's Blog, a software engineer in web development. I have experience about
+        developing for TechFin company. Here, I share my knowledge and experience about front-end
+        and back-end in web development. I hope you find it helpful.
+      </p>
+    </div>
+    <div class="w-full"><Avatar /></div>
   </div>
 </Layout>

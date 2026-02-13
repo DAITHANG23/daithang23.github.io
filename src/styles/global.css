@@ -13,12 +13,13 @@
   --color-border: var(--border);
   --shadow-black: 0 2px 8px rgba(var(--black), 5%);
   --shadow-white: 0 2px 8px rgba(var(--white), 5%);
+  --blob-shadow: drop-shadow(0 12px 12px hsla(var(--primary), 100%, 40%, 0.2));
 }
 
 :root,
 html[data-theme="light"] {
   --background: #ffff;
-  --primary: #c084fc;
+  --primary: #60a5fa;
   --purple-soft: rgba(192, 132, 252, 0.25); /* purple-400 */
   --purple-faint: rgba(192, 132, 252, 0.15);
   --primary-text: #16171c;
@@ -32,7 +33,7 @@ html[data-theme="light"] {
 
 html[data-theme="dark"] {
   --background: #212737;
-  --primary: #60a5fa;
+  --primary: #ff758a;
   --primary-text: #ffff;
   --foreground: #eaedf3;
   --accent: #ff6b01;
@@ -51,7 +52,7 @@ body {
   background: var(--background);
 }
 main {
-  @apply mx-auto my-0 box-border flex min-h-[100vh] flex-col p-0;
+  @apply mx-auto my-0 box-border flex min-h-[100vh] max-w-[1120px] flex-col p-0;
 }
 h1,
 h5 {
