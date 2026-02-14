@@ -2,6 +2,10 @@
 import Avatar from "@/components/Avatar.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "@/layouts/Layout.astro";
+import IconGithub from "@/assets/IconGithub.svg";
+import IconLinkedin from "@/assets/IconLinkedin.svg";
+import IconMail from "@/assets/IconMail.svg";
+import IconFacebooke from "@/assets/IconFacebooke.svg";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -15,10 +19,24 @@ import Layout from "@/layouts/Layout.astro";
       <h1 class="text-primary mb-4">Thang(Dom) Nguyen</h1>
       <h5>A Full-Stack Engineer</h5>
       <p>
-        The Dom Nguyen's Blog, a software engineer in web development. I have experience about
-        developing for TechFin company. Here, I share my knowledge and experience about front-end
-        and back-end in web development. I hope you find it helpful.
+        A software engineering in web development. I have experience about developing for TechFin
+        company. Here, I share my knowledge and experience about front-end and back-end in web
+        development.
       </p>
+      <div>
+        <ul class="text-primary-text mt-4 flex items-center gap-4">
+          <li>
+            <a
+              class="text-primary-text bg-primary p-[5rem] text-[1.5rem]"
+              style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)"
+              ><IconGithub /></a
+            >
+          </li>
+          <li><a><IconLinkedin /></a></li>
+          <li><a><IconMail /></a></li>
+          <li><a><IconFacebooke /></a></li>
+        </ul>
+      </div>
     </div>
     <div class="w-full"><Avatar /></div>
   </div>
