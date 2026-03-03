@@ -1,4 +1,5 @@
 function initReveal() {
+  ScrollReveal({ reset: true });
   const sr = ScrollReveal({
     origin: "top",
     distance: "60px",
