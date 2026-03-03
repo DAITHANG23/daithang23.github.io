@@ -288,7 +288,7 @@ export const LIST_EXPERIENCES: Array<ListExperiencesType> = [
     time: "2/2025-Present",
     title: "Freelancer Projects",
     content:
-      "Education & Student Management System which a web – app to support catechists and parents in managing student and accademic performance. The app is built using Typescript, Nextjs, Supabase, Material UI, PostgreSQL, host on Vercel.",
+      "• Education & Student Management System which a web – app to support catechists and parents in managing student and accademic performance. The app is built using Typescript, Nextjs, Supabase, Material UI, PostgreSQL, host on Vercel.",
   },
   {
     time: "11/2023 - 12/2024",
