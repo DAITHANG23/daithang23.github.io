@@ -1,13 +1,14 @@
-const publicContactKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
-const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
-const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+import emailjs from "@emailjs/browser";
 
-function initContact() {
+export function initContact() {
+  const publicContactKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+  const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+  const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+
+  emailjs.init({
+    publicKey: publicContactKey,
+  });
   window.addEventListener("DOMContentLoaded", () => {
-    emailjs.init({
-      publicKey: publicContactKey,
-    });
-
     const form = document.getElementById("contact-form");
     const contactMessage = document.getElementById("contact-message");
 
@@ -15,7 +16,6 @@ function initContact() {
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-
       emailjs
         .sendForm(serviceId, templateId, form)
         .then(() => {
