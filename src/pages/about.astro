@@ -14,10 +14,6 @@ import Backend from "@/assets/IconBackend.svg";
 import IconGithubCode from "@/assets/IconGithubCode.svg";
 import IconLink from "@/assets/IconLink.svg";
 import SectionAboutLayout from "@/layouts/SectionAboutLayout.astro";
-
-const publicContactKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
-const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
-const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
 ---
 
 <Layout
@@ -142,7 +138,7 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
     <Divider />
 
     <!--==================== PROJECTS ====================-->
-    <SectionAboutLayout contact title="Projects" content="Recent Projects "
+    <SectionAboutLayout contact title="Projects" content="Recent Projects"
       ><div
         class="grid grid-cols-1 gap-8 md:grid-cols-[repeat(2,352px)] xl:grid-cols-[repeat(3,352px)]"
       >
@@ -157,8 +153,10 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
               <div class="project-overlay absolute inset-0 flex translate-y-full flex-col items-center justify-center bg-[linear-gradient(180deg,hsla(0,0%,0%,0)_0%,hsla(var(--hue),79%,45%,0.95)_120%)] p-6 text-white transition-transform duration-500 group-hover:translate-y-0 group-[.active]:translate-y-0">
                 <p class="text-primary-text m-0">{item.type}</p>
                 <h5 class="text-primary-text">{item.title}</h5>
-                <p class="text-primary-text m-0">{item.content}</p>
-                <p class="text-primary-text m-0">Technologies: {item.technologies}</p>
+                <p class="text-primary-text m-0 text-start">{item.content}</p>
+                <p class="text-primary-text m-0 py-4 text-start">
+                  <span class="font-bold">Technologies:</span> {item.technologies}
+                </p>
 
                 {item.urlDemo && (
                   <div class="hover-effect text-primary-text flex items-center justify-center gap-2">
@@ -281,7 +279,13 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
   const links = document.querySelectorAll(".hover-effect a");
 
   links.forEach(l => {
-    l.classList.add("text-primary-text", "p-0", "hover:underline", "hover:underline-offset-4");
+    l.classList.add(
+      "text-primary-text",
+      "p-0",
+      "hover:underline",
+      "hover:underline-offset-4",
+      "font-bold"
+    );
   });
 
   // Write script for projects and services section
@@ -329,37 +333,7 @@ const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
 
 <script src="/src/js/main.js"></script>
 
-<script is:inline define:vars={{ publicContactKey, serviceId, templateId }}>
-  window.addEventListener("DOMContentLoaded", () => {
-    emailjs.init({
-      publicKey: publicContactKey,
-    });
-
-    const form = document.getElementById("contact-form");
-    const contactMessage = document.getElementById("contact-message");
-
-    if (!form) return;
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      emailjs
-        .sendForm(serviceId, templateId, form)
-        .then(() => {
-          contactMessage.textContent = "Message sent successfully!";
-          contactMessage.classList.remove("text-red-500");
-          contactMessage.classList.add("text-green-500");
-          form.reset();
-        })
-        .catch(error => {
-          contactMessage.textContent = "Failed to send message!";
-          contactMessage.classList.remove("text-green-500");
-          contactMessage.classList.add("text-red-500");
-          // eslint-disable-next-line no-console
-          console.error(error);
-        });
-    });
-  });
+<script type="module">
+  import { initContact } from "/src/js/contact.js";
+  initContact();
 </script>
-
-<!-- <script src="/src/js/contact.js"></script> -->
