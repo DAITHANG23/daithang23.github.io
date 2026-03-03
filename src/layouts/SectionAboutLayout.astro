@@ -1,0 +1,27 @@
+---
+const {
+  contact = false,
+  title = "",
+  content = "",
+  isScreenHeight = true,
+  className = "",
+} = Astro.props;
+---
+
+<section
+  class:list={[
+    `flex h-auto flex-col items-center justify-center text-center ${className || ""}`,
+    isScreenHeight ? "md:h-screen" : "",
+  ]}
+  id={contact ? "contact" : ""}
+>
+  <h5 class="summary__about my-0">
+    {contact ? "Get In" : "My"}
+    <span class="text-primary">{title}</span>
+  </h5>
+
+  <p class="summary__about text-primary-text section__title mt-4 !text-2xl lg:!text-5xl">
+    {content}
+  </p>
+  <slot />
+</section>

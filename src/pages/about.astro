@@ -13,6 +13,11 @@ import Frontend from "@/assets/IconFrontend.svg";
 import Backend from "@/assets/IconBackend.svg";
 import IconGithubCode from "@/assets/IconGithubCode.svg";
 import IconLink from "@/assets/IconLink.svg";
+import SectionAboutLayout from "@/layouts/sectionAboutLayout.astro";
+
+const publicContactKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
 ---
 
 <Layout
@@ -46,14 +51,14 @@ import IconLink from "@/assets/IconLink.svg";
     </div>
     <Divider />
 
-    <!-- Experiences -->
+    <!--==================== EXPERIENCES ====================-->
 
     <div class="grid grid-cols-1 items-center justify-center gap-4 md:h-screen md:grid-cols-2">
       <div class="avatar__experiences flex items-center justify-center"><AvatarAbout /></div>
 
       <div class="flex flex-col items-center justify-center">
         <div
-          class="experience__content flex w-full flex-col items-center justify-center md:items-start"
+          class="experience__title flex w-full flex-col items-center justify-center md:items-start"
         >
           <p class="my-0 !text-[15px] md:!text-2xl">
             My <span class="text-primary">Achievements</span>
@@ -82,17 +87,16 @@ import IconLink from "@/assets/IconLink.svg";
 
     <Divider />
 
-    <!-- Technologies -->
-
-    <div
-      class="about__technologies flex h-auto flex-col items-center justify-center text-center md:h-screen"
+    <!--==================== TECHNOLOGIES ====================-->
+    <SectionAboutLayout
+      contact
+      title="Technologies"
+      content="Technologies I've worked with I've worked withices"
     >
-      <h5 class="my-0">My <span class="text-primary">Technologies</span></h5>
-      <p class="text-primary-text mt-4 !text-2xl lg:!text-5xl">Technologies I've worked with</p>
       <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-3">
         {
           MY_TECHNOLOGIES.map(item => (
-            <div class="col-span-1 h-[15.5rem] border border-solid border-gray-300">
+            <div class="summary__about col-span-1 h-[15.5rem] border border-solid border-gray-300">
               <div class="bg-grey text-primary text-lg font-bold">{item.title}</div>
               <div class="flex h-[10rem] w-full flex-wrap items-center justify-center gap-2 text-center">
                 {item.technologies.map(tech => (
@@ -106,23 +110,20 @@ import IconLink from "@/assets/IconLink.svg";
             </div>
           ))
         }
-      </div>
-    </div>
+      </div></SectionAboutLayout
+    >
 
     <Divider />
 
-    <!-- Services -->
-
-    <div class="flex flex-col items-center justify-center md:h-screen">
-      <h5 class="service__about my-0">My <span class="text-primary">Services</span></h5>
-      <p class="text-primary-text service__about mt-4 !text-2xl lg:!text-5xl">What I Do</p>
+    <!--==================== SERVICES ====================-->
+    <SectionAboutLayout contact title="Services" content="Services">
       <div class="grid grid-cols-1 gap-8 md:grid-cols-[repeat(2,352px)]">
         {
           MY_SERVICES.map((item, index) => (
             <div
               class:list={[
                 index > 0 ? "service__about__2" : "service__about__1",
-                "service [&.active]:border-primary text-primary-text hover:border-primary flex transform flex-col items-center justify-center rounded-xl border border-3 border-gray-300 bg-gray-300 px-[2rem] py-[3.5rem] text-center dark:border-black dark:bg-black",
+                "content [&.active]:border-primary text-primary-text hover:border-primary flex transform flex-col items-center justify-center rounded-xl border border-3 border-gray-300 bg-gray-300 px-[2rem] py-[3.5rem] text-center dark:border-black dark:bg-black",
               ]}
               style={{
                 transform: "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)",
@@ -135,23 +136,19 @@ import IconLink from "@/assets/IconLink.svg";
             </div>
           ))
         }
-      </div>
-    </div>
+      </div></SectionAboutLayout
+    >
 
     <Divider />
 
-    <!-- Projects -->
-
-    <div class="my-[12rem] flex h-auto flex-col items-center justify-center">
-      <h5 class="project__about my-0">My <span class="text-primary">Projects</span></h5>
-      <p class="project__about text-primary-text mt-4 !text-2xl lg:!text-5xl">Recent Projects</p>
-      <div
+    <!--==================== PROJECTS ====================-->
+    <SectionAboutLayout contact title="Projects" content="Recent Projects "
+      ><div
         class="grid grid-cols-1 gap-8 md:grid-cols-[repeat(2,352px)] xl:grid-cols-[repeat(3,352px)]"
-        data-projects
       >
         {
           MY_PROJECTS.map(item => (
-            <div class="project__about content-project group relative overflow-hidden rounded-xl shadow-md">
+            <div class="summary__about content group relative overflow-hidden rounded-xl shadow-md">
               <img
                 src={item.image}
                 alt={item.title}
@@ -197,8 +194,48 @@ import IconLink from "@/assets/IconLink.svg";
             </div>
           ))
         }
+      </div></SectionAboutLayout
+    >
+
+    <Divider />
+
+    <!--==================== CONTACT ====================-->
+    <SectionAboutLayout contact title="Touch" content="Contact Me">
+      <div class="summary__about w-full text-center md:w-[60%]">
+        <form class="relative grid w-full grid-cols-1 gap-6 md:grid-cols-2" id="contact-form">
+          <input
+            type="text"
+            name="user_name"
+            required
+            placeholder="Enter your name"
+            class="input__contact col-span-2 md:col-span-1"
+          />
+          <input
+            type="email"
+            name="user_email"
+            required
+            placeholder="Enter your email"
+            class="input__contact col-span-2 md:col-span-1"
+          />
+
+          <textarea
+            rows="8"
+            name="user_project"
+            required
+            placeholder="Enter your message"
+            class="input__contact col-span-2"></textarea>
+
+          <p class="absolute bottom-[4.5rem] left-0 text-start" id="contact-message"></p>
+
+          <button
+            type="submit"
+            class="bg-primary col-span-2 mx-auto mt-10 flex w-[50%] cursor-pointer items-center justify-center rounded-[0.5rem] p-4 text-white transition-colors transition-transform duration-300 ease-in-out hover:scale-105"
+          >
+            Send Message
+          </button>
+        </form>
       </div>
-    </div>
+    </SectionAboutLayout>
   </div>
 </Layout>
 
@@ -247,13 +284,13 @@ import IconLink from "@/assets/IconLink.svg";
     l.classList.add("text-primary-text", "p-0", "hover:underline", "hover:underline-offset-4");
   });
 
-  // Write script for projects section
-  const projects = document.querySelectorAll(".content-project");
+  // Write script for projects and services section
+  const projects = document.querySelectorAll(".content");
   projects.forEach(project => {
     project.addEventListener("click", e => {
       e.stopPropagation();
 
-      document.querySelectorAll(".content-project").forEach(t => {
+      projects.forEach(t => {
         if (t !== project) {
           t.classList.remove("active");
         }
@@ -264,32 +301,65 @@ import IconLink from "@/assets/IconLink.svg";
   });
 
   document.addEventListener("click", () => {
-    document.querySelectorAll(".content-project").forEach(t => {
+    projects.forEach(t => {
       t.classList.remove("active");
     });
   });
 
-  // Write script for services section
-  const services = document.querySelectorAll(".service");
-  services.forEach(project => {
-    project.addEventListener("click", e => {
-      e.stopPropagation();
+  // Write script for contact form
+  const contacts = document.querySelectorAll(".input__contact");
 
-      document.querySelectorAll(".service").forEach(t => {
-        if (t !== project) {
-          t.classList.remove("active");
-        }
-      });
-
-      project?.classList.toggle("active");
-    });
-  });
-
-  document.addEventListener("click", () => {
-    document.querySelectorAll(".service").forEach(t => {
-      t.classList.remove("active");
-    });
+  contacts.forEach(input => {
+    input.classList.add(
+      "focus:border-primary",
+      "focus:ring-primary",
+      "focus:ring-opacity-50",
+      "rounded-[0.5rem]",
+      "border",
+      "border-solid",
+      "border-gray-300",
+      "bg-gray-300",
+      "p-6",
+      "focus:ring-2",
+      "focus:outline-none",
+      "dark:bg-black"
+    );
   });
 </script>
 
 <script src="/src/js/main.js"></script>
+
+<script is:inline define:vars={{ publicContactKey, serviceId, templateId }}>
+  window.addEventListener("DOMContentLoaded", () => {
+    emailjs.init({
+      publicKey: publicContactKey,
+    });
+
+    const form = document.getElementById("contact-form");
+    const contactMessage = document.getElementById("contact-message");
+
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      emailjs
+        .sendForm(serviceId, templateId, form)
+        .then(() => {
+          contactMessage.textContent = "Message sent successfully!";
+          contactMessage.classList.remove("text-red-500");
+          contactMessage.classList.add("text-green-500");
+          form.reset();
+        })
+        .catch(error => {
+          contactMessage.textContent = "Failed to send message!";
+          contactMessage.classList.remove("text-green-500");
+          contactMessage.classList.add("text-red-500");
+          // eslint-disable-next-line no-console
+          console.error(error);
+        });
+    });
+  });
+</script>
+
+<!-- <script src="/src/js/contact.js"></script> -->
