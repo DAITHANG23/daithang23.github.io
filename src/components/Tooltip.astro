@@ -19,36 +19,39 @@ const { content } = Astro.props;
 </div>
 
 <script>
-  const tooltips = document.querySelectorAll("[data-tooltip]");
+  function tooltipInit() {
+    const tooltips = document.querySelectorAll("[data-tooltip]");
 
-  tooltips.forEach(wrapper => {
-    const tooltip = wrapper.querySelector(".tooltip");
-    let time: ReturnType<typeof setTimeout>;
+    tooltips.forEach(wrapper => {
+      const tooltip = wrapper.querySelector(".tooltip");
+      let time: ReturnType<typeof setTimeout>;
 
-    wrapper.addEventListener("click", e => {
-      e.stopPropagation();
+      wrapper.addEventListener("click", e => {
+        e.stopPropagation();
 
-      document.querySelectorAll(".tooltip").forEach(t => {
-        if (t !== tooltip) {
-          t.classList.remove("opacity-100");
+        document.querySelectorAll(".tooltip").forEach(t => {
+          if (t !== tooltip) {
+            t.classList.remove("opacity-100");
+          }
+        });
+
+        const isOpen = tooltip?.classList.toggle("opacity-100");
+
+        clearTimeout(time);
+
+        if (isOpen) {
+          time = setTimeout(() => {
+            tooltip?.classList.remove("opacity-100");
+          }, 1500);
         }
       });
-
-      const isOpen = tooltip?.classList.toggle("opacity-100");
-
-      clearTimeout(time);
-
-      if (isOpen) {
-        time = setTimeout(() => {
-          tooltip?.classList.remove("opacity-100");
-        }, 1500);
-      }
     });
-  });
 
-  document.addEventListener("click", () => {
-    document.querySelectorAll(".tooltip").forEach(t => {
-      t.classList.remove("opacity-100");
+    document.addEventListener("click", () => {
+      document.querySelectorAll(".tooltip").forEach(t => {
+        t.classList.remove("opacity-100");
+      });
     });
-  });
+  }
+  document.addEventListener("astro:page-load", tooltipInit);
 </script>

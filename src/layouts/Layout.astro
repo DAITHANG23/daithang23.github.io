@@ -45,8 +45,12 @@ const { title, description } = Astro.props;
   </body>
 </html>
 
-<script is:inline data-astro-rerun>
-  document.addEventListener("astro:after-swap", () =>
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
-  );
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const mainContent: HTMLElement | null = document.querySelector("#main-content");
+    const backUrl = mainContent?.dataset?.backurl;
+    if (backUrl) {
+      sessionStorage.setItem("backUrl", backUrl);
+    }
+  });
 </script>
