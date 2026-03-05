@@ -1,19 +1,52 @@
 ---
 import { getCollection } from "astro:content";
-import { SITE_DESCRIPTION } from "../../constants";
 import Layout from "@/layouts/Layout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { SITE } from "@/constants";
+import type { GetStaticPathsOptions } from "astro";
+import image from "@/assets/blog-placeholder-1.jpg";
 
-export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts.map(post => ({
-    params: { slug: post.id },
-    props: post,
-  }));
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return paginate(posts, { pageSize: 5 });
 }
+
+const { page } = Astro.props;
 ---
 
-<Layout title="Blogs | Domcoding" description={SITE_DESCRIPTION}>
-  <body>
-    <main></main>
-  </body>
+<Layout title="Blogs | Domcoding" description={SITE.description}>
+  <Breadcrumb />
+  <div class="mx-auto my-0 grid w-full grid-cols-1 gap-8 p-4 md:grid-cols-2">
+    {
+      page.data.map(blog => {
+        const { author, description, title, pubDate, updatedDate, heroImage } = blog.data;
+
+        return (
+          <div class="flex h-[240px] w-full cursor-pointer justify-between gap-4 rounded-lg p-4 shadow-lg transition-transform duration-300 hover:scale-105">
+            <div class="h-full w-[70%]">
+              <div class="flex justify-between">
+                <p class="bg-primary rounded px-1 pt-1.5 text-center text-sm text-white">
+                  {updatedDate ? "Updated" : "Published"}
+                </p>
+                <p>
+                  {updatedDate ? updatedDate.toLocaleDateString() : pubDate.toLocaleDateString()}
+                </p>
+              </div>
+              <p class="text-sm font-bold">{title}</p>
+              <p class="text-sm">{description}</p>
+              <p class="text-sm font-semibold">{author}</p>
+            </div>
+
+            <div class="h-full w-[30%]">
+              <img
+                src={image.src}
+                alt={blog.data.title}
+                class="m-0 h-full w-full rounded-lg object-cover"
+              />
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
 </Layout>

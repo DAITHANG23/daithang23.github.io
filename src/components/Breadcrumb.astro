@@ -1,0 +1,10 @@
+---
+const pathname = Astro.url.pathname;
+---
+
+<div class="mt-8">
+  <a href="/" class="text-primary-text underline-offset-4 hover:underline">Home</a> / <span
+    class="text-primary pl-2 font-bold capitalize"
+    >{pathname.split("/").filter(Boolean).join(" / ")}</span
+  >
+</div>
