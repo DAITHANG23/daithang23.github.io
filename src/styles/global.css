@@ -63,6 +63,10 @@ h5 {
   @apply font-red-hat-display;
 }
 
+p {
+  @apply m-0;
+}
+
 .active-nav {
   @apply !border-b-primary decoration-2 underline-offset-4;
 }

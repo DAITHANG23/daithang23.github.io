@@ -17,6 +17,7 @@ export const SITE = {
   title: "DomCoding",
   description: "Welcome to my website!",
   website: "https://daithang23.github.io/",
+  timezone: "Asia/Bangkok",
 };
 
 export const SOCIALS = [
