@@ -56,11 +56,15 @@ body {
   background: var(--background);
 }
 main {
-  @apply mx-auto my-0 mt-[4rem] box-border flex min-h-[100vh] max-w-[1120px] flex-col p-0;
+  @apply mx-auto my-0 mt-[4rem] box-border flex min-h-screen max-w-[1120px] flex-col overflow-hidden p-0;
 }
 h1,
 h5 {
   @apply font-red-hat-display;
+}
+
+p {
+  @apply m-0;
 }
 
 .active-nav {

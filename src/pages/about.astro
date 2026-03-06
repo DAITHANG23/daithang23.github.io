@@ -1,5 +1,4 @@
 ---
-import AboutHeroImage from "../assets/blog-placeholder-about.jpg";
 import Layout from "@/layouts/Layout.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import Avatar from "@/components/Avatar.astro";
@@ -14,14 +13,11 @@ import Backend from "@/assets/IconBackend.svg";
 import IconGithubCode from "@/assets/IconGithubCode.svg";
 import IconLink from "@/assets/IconLink.svg";
 import SectionAboutLayout from "@/layouts/SectionAboutLayout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
 ---
 
-<Layout
-  title="About Me | Domcoding"
-  description="Lorem ipsum dolor sit amet"
-  pubDate={new Date("August 08 2021")}
-  heroImage={AboutHeroImage}
->
+<Layout title="About Me | Domcoding" description="Lorem ipsum dolor sit amet">
+  <Breadcrumb />
   <BackToTopButton />
   <div class="mx-auto my-0 w-full p-4">
     <div class="md:h-screen">
@@ -119,7 +115,7 @@ import SectionAboutLayout from "@/layouts/SectionAboutLayout.astro";
             <div
               class:list={[
                 index > 0 ? "service__about__2" : "service__about__1",
-                "content [&.active]:border-primary text-primary-text hover:border-primary flex transform flex-col items-center justify-center rounded-xl border border-3 border-gray-300 bg-gray-300 px-[2rem] py-[3.5rem] text-center dark:border-black dark:bg-black",
+                "content__about [&.active]:border-primary text-primary-text hover:border-primary flex transform flex-col items-center justify-center rounded-xl border border-3 border-gray-300 bg-gray-300 px-[2rem] py-[3.5rem] text-center dark:border-black dark:bg-black",
               ]}
               style={{
                 transform: "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)",
@@ -140,17 +136,17 @@ import SectionAboutLayout from "@/layouts/SectionAboutLayout.astro";
     <!--==================== PROJECTS ====================-->
     <SectionAboutLayout contact title="Projects" content="Recent Projects"
       ><div
-        class="grid grid-cols-1 gap-8 md:grid-cols-[repeat(2,352px)] xl:grid-cols-[repeat(3,352px)]"
+        class="grid grid-cols-[repeat(1,352px)] gap-8 md:grid-cols-[repeat(2,352px)] xl:grid-cols-[repeat(3,352px)]"
       >
         {
           MY_PROJECTS.map(item => (
-            <div class="summary__about content group relative overflow-hidden rounded-xl shadow-md">
+            <div class="summary__about content__about group relative overflow-hidden rounded-xl shadow-md">
               <img
                 src={item.image}
                 alt={item.title}
                 class="m-0 h-[37.5rem] w-full rounded-xl group-hover:opacity-10 group-[.active]:opacity-10"
               />
-              <div class="project-overlay absolute inset-0 flex translate-y-full flex-col items-center justify-center bg-[linear-gradient(180deg,hsla(0,0%,0%,0)_0%,hsla(var(--hue),79%,45%,0.95)_120%)] p-6 text-white transition-transform duration-500 group-hover:translate-y-0 group-[.active]:translate-y-0">
+              <div class="absolute inset-0 flex translate-y-full flex-col items-center justify-center bg-[linear-gradient(180deg,hsla(0,0%,0%,0)_0%,hsla(var(--hue),79%,45%,0.95)_120%)] p-6 text-white transition-transform duration-500 group-hover:translate-y-0 group-[.active]:translate-y-0">
                 <p class="text-primary-text m-0">{item.type}</p>
                 <h5 class="text-primary-text">{item.title}</h5>
                 <p class="text-primary-text m-0 text-start">{item.content}</p>
@@ -238,102 +234,7 @@ import SectionAboutLayout from "@/layouts/SectionAboutLayout.astro";
 </Layout>
 
 <script>
-  function createProgressBar() {
-    const progressContainer = document.createElement("div");
-    progressContainer.className = "progress-container fixed top-0 z-30 h-1 w-full bg-background";
-
-    const progressBar = document.createElement("div");
-    progressBar.className =
-      "progress-bar h-1 w-0 bg-primary transition-width duration-300 ease-in-out";
-    progressBar.id = "myBar";
-
-    progressContainer.appendChild(progressBar);
-
-    document.body.appendChild(progressContainer);
-  }
-  createProgressBar();
-
-  function updateScrollProgress() {
-    document.addEventListener("scroll", () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      if (document) {
-        const myBar = document.getElementById("myBar");
-        if (myBar) {
-          myBar.style.width = scrolled + "%";
-        }
-      }
-    });
-  }
-  updateScrollProgress();
-
-  const styleWorkeducContent = document.querySelectorAll(".workeduc-content");
-  styleWorkeducContent.forEach(item => {
-    const beforeElement = document.createElement("span");
-    beforeElement.className =
-      "absolute left-[-0.65rem] top-0 h-[1.2rem] w-[1.2rem] rounded-full bg-primary";
-    item.appendChild(beforeElement);
-  });
-
-  const links = document.querySelectorAll(".hover-effect a");
-
-  links.forEach(l => {
-    l.classList.add(
-      "text-primary-text",
-      "p-0",
-      "hover:underline",
-      "hover:underline-offset-4",
-      "font-bold"
-    );
-  });
-
-  // Write script for projects and services section
-  const projects = document.querySelectorAll(".content");
-  projects.forEach(project => {
-    project.addEventListener("click", e => {
-      e.stopPropagation();
-
-      projects.forEach(t => {
-        if (t !== project) {
-          t.classList.remove("active");
-        }
-      });
-
-      project?.classList.toggle("active");
-    });
-  });
-
-  document.addEventListener("click", () => {
-    projects.forEach(t => {
-      t.classList.remove("active");
-    });
-  });
-
-  // Write script for contact form
-  const contacts = document.querySelectorAll(".input__contact");
-
-  contacts.forEach(input => {
-    input.classList.add(
-      "focus:border-primary",
-      "focus:ring-primary",
-      "focus:ring-opacity-50",
-      "rounded-[0.5rem]",
-      "border",
-      "border-solid",
-      "border-gray-300",
-      "bg-gray-300",
-      "p-6",
-      "focus:ring-2",
-      "focus:outline-none",
-      "dark:bg-black"
-    );
-  });
-</script>
-
-<script src="/src/js/main.js"></script>
-
-<script>
-  import { initContact } from "../js/contact.js";
-  initContact();
+  import "../js/about.js";
+  import "../js/main.js";
+  import "../js/contact.js";
 </script>

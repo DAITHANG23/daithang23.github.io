@@ -1,19 +1,65 @@
 ---
 import { getCollection } from "astro:content";
-import { SITE_DESCRIPTION } from "../../constants";
 import Layout from "@/layouts/Layout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { SITE } from "@/constants";
+import type { GetStaticPathsOptions } from "astro";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import Pagination from "@/components/Pagination.astro";
 
-export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts.map(post => ({
-    params: { slug: post.id },
-    props: post,
-  }));
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return paginate(posts, { pageSize: 4 });
 }
+
+const { page } = Astro.props;
 ---
 
-<Layout title="Blogs | Domcoding" description={SITE_DESCRIPTION}>
-  <body>
-    <main></main>
-  </body>
+<Layout title="Blogs | Domcoding" description={SITE.description}>
+  <Breadcrumb />
+  <div class="my-10 grid w-full grid-cols-1 gap-8 p-4 md:grid-cols-2">
+    {
+      page.data.map(blog => {
+        const { author, description, title, pubDate, updatedDate, heroImage } = blog.data;
+        const isModified = updatedDate && updatedDate > pubDate;
+        const datetime = dayjs(isModified ? pubDate : pubDate).tz(SITE.timezone);
+        return (
+          <a href={`/blogs/${blog.id}`} class="block">
+            <div class="flex h-[15rem] min-w-[21rem] cursor-pointer justify-between gap-4 rounded-lg bg-white p-4 shadow-lg transition-transform duration-300 hover:-translate-y-1 dark:bg-[#222a41]">
+              <div class="h-auto w-full md:w-[65%]">
+                <div class="flex justify-between">
+                  <p class="bg-primary rounded p-1 text-center text-xs font-bold text-sky-800 dark:text-pink-700">
+                    {updatedDate ? "Updated" : "Published"}
+                  </p>
+                  <p class="text-xs">{datetime.format("D MMM, YYYY")}</p>
+                </div>
+                <div class="items-between flex h-[90%] flex-col justify-between pt-4">
+                  <div>
+                    <p class="text-sm font-bold">{title}</p>
+                    <p class="pt-4 text-sm">{description}</p>
+                  </div>
+
+                  <p class="text-sm font-semibold">{author}</p>
+                </div>
+              </div>
+
+              <div class="hidden h-full w-[35%] md:block">
+                <img
+                  src={typeof heroImage === "string" ? heroImage : heroImage?.src}
+                  alt={blog.data.title}
+                  class="m-0 h-full w-full rounded-lg object-cover"
+                />
+              </div>
+            </div>
+          </a>
+        );
+      })
+    }
+  </div>
+  <Pagination {page} />
 </Layout>

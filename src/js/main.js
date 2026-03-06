@@ -6,6 +6,12 @@ function initReveal() {
     duration: 2500,
     delay: 400,
     reset: false,
+    viewOffset: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
   });
 
   sr.reveal(".about__data", { origin: "left" });

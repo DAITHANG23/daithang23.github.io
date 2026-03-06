@@ -15,7 +15,7 @@ const { id, href, class: className = "", ariaLabel, title, disabled = false } = 
   disabled ? (
     <span
       id={id}
-      class:list={["group inline-block", className]}
+      class:list={["group inline-block p-2 text-center", className]}
       title={title}
       aria-disabled={disabled}
     >
@@ -26,7 +26,7 @@ const { id, href, class: className = "", ariaLabel, title, disabled = false } = 
       id={id}
       {href}
       class:list={[
-        "group hover:text-primary text-primary-text inline-block h-9 w-9 transform rounded-full border-0 p-2 text-center hover:rotate-[15deg]",
+        "group hover:text-primary text-primary-text inline-block transform rounded-full border-0 p-2 text-center",
         className,
       ]}
       aria-label={ariaLabel}

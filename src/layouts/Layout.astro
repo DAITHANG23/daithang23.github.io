@@ -7,17 +7,7 @@ import { Font } from "astro:assets";
 // type Props = CollectionEntry<'blog'>['data'];
 export interface Props {
   title: string;
-  author?: string;
-  profile?: string;
   description: string;
-  ogImage?: string;
-  canonicalURL?: string;
-  pubDatetime?: Date;
-  modDatetime?: Date | null;
-  scrollSmooth?: boolean;
-  pubDate?: Date;
-  updatedDate?: Date | null;
-  heroImage?: any;
 }
 
 const { title, description } = Astro.props;
@@ -45,8 +35,12 @@ const { title, description } = Astro.props;
   </body>
 </html>
 
-<script is:inline data-astro-rerun>
-  document.addEventListener("astro:after-swap", () =>
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
-  );
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const mainContent: HTMLElement | null = document.querySelector("#main-content");
+    const backUrl = mainContent?.dataset?.backurl;
+    if (backUrl) {
+      sessionStorage.setItem("backUrl", backUrl);
+    }
+  });
 </script>

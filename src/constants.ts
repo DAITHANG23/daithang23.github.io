@@ -12,8 +12,13 @@ import type {
   MyServicesType,
 } from "./types/common";
 
-export const SITE_TITLE = "DomCoding";
-export const SITE_DESCRIPTION = "Welcome to my website!";
+export const SITE = {
+  author: "Dom Nguyen",
+  title: "DomCoding",
+  description: "Welcome to my website!",
+  website: "https://daithang23.github.io/",
+  timezone: "Asia/Bangkok",
+};
 
 export const SOCIALS = [
   { name: "GitHub", link: "https://github.com/DAITHANG23", icon: IconGithub },

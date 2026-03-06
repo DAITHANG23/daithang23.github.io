@@ -15,8 +15,9 @@
       <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
     </svg>
   </button>
-
-  <script>
+</div>
+<script>
+  const initBackToTopButton = () => {
     const scrollToTopBtn = document.getElementById("scroll-to-top");
 
     window.addEventListener("scroll", () => {
@@ -30,5 +31,7 @@
     scrollToTopBtn?.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
-  </script>
-</div>
+  };
+
+  document.addEventListener("astro:page-load", initBackToTopButton);
+</script>
