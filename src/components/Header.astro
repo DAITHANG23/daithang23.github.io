@@ -3,7 +3,7 @@ import LinkButton from "./LinkButton.astro";
 import IconMoon from "@/assets/IconMoon.svg";
 import IconSearch from "@/assets/IconSearch.svg";
 import IconMenu from "@/assets/IconMenu.svg";
-import IconRightArrow from "@/assets/IconRightArrow.svg";
+import IconRightArrowCircle from "@/assets/IconRightArrowCircle.svg";
 import IconSun from "@/assets/IconSun.svg";
 import { SITE } from "@/constants";
 const { pathname } = Astro.url;
@@ -67,7 +67,7 @@ const isActive = (path: string) => {
     id="nav-menu"
   >
     <div class="bg-background absolute top-[50%] left-[-16px] h-8 w-8 rounded-full p-1 shadow-md">
-      <button id="close-menu"><IconRightArrow /></button>
+      <button id="close-menu"><IconRightArrowCircle /></button>
     </div>
     <h5 class="italic"><a class="text-primary-text" href="/">{SITE.title}</a></h5>
     <hr />
