@@ -18,11 +18,13 @@
     "astro": "^5.17.1",
     "dayjs": "^1.11.19",
     "globals": "^17.3.0",
+    "lodash.kebabcase": "^4.1.1",
     "sharp": "^0.34.3",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@shikijs/transformers": "^3.22.0",
+    "@types/lodash.kebabcase": "^4.1.9",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
