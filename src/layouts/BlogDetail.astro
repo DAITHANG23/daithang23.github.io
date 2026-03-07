@@ -5,6 +5,8 @@ import { render } from "astro:content";
 import IconChevronLeft from "@/assets/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/IconChevronRight.svg";
 import Divider from "@/components/Divider.astro";
+import BackButton from "@/components/BackButton.astro";
+import getPath from "@/utils/getPath";
 
 // type Props = CollectionEntry<'blog'>['data'];
 
@@ -32,6 +34,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
 ---
 
 <Layout title={`${title} | Domcoding`} description={description}>
+  <BackButton />
   <div class="mb-10 w-full">
     <div class="h-[480px] w-full">
       <img
@@ -66,7 +69,10 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
       <div data-pagefind-ignore class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
         {
           prevPost && (
-            <a href={prevPost.id} class="flex w-full gap-1 hover:opacity-75">
+            <a
+              href={getPath(prevPost.id, prevPost.filePath)}
+              class="flex w-full gap-1 hover:opacity-75"
+            >
               <IconChevronLeft class="text-primary-text inline-block flex-none rtl:rotate-180" />
               <div>
                 <span class="text-primary-text">Previous Post</span>
@@ -78,7 +84,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
         {
           nextPost && (
             <a
-              href={nextPost.id}
+              href={getPath(nextPost.id, nextPost.filePath)}
               class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
             >
               <div>
