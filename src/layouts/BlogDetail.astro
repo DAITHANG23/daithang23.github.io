@@ -7,6 +7,7 @@ import IconChevronRight from "@/assets/IconChevronRight.svg";
 import Divider from "@/components/Divider.astro";
 import BackButton from "@/components/BackButton.astro";
 import getPath from "@/utils/getPath";
+import ShareLinks from "@/components/ShareLinks.astro";
 
 // type Props = CollectionEntry<'blog'>['data'];
 
@@ -35,67 +36,65 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
 
 <Layout title={`${title} | Domcoding`} description={description}>
   <BackButton />
-  <div class="mb-10 w-full">
-    <div class="h-[480px] w-full">
+  <div class="mb-10 w-full p-4">
+    <div class="relative mb-8 h-[480px] w-full">
       <img
         src={typeof heroImage === "string" ? heroImage : heroImage?.src}
         alt={title}
-        style="w-full h-full object-fill"
+        class="h-full w-full rounded-lg object-cover md:!my-8"
       />
+      <h5 class="absolute top-0 left-0 p-4 text-white">
+        {title}
+      </h5>
     </div>
 
-    <div class="p-4">
-      <div class="w-full">
-        <Content />
-      </div>
-      <div class="pt-8 text-start">
-        {
-          tags.map(t => (
-            <a
-              class="hover:text-primary cursor-pointer transition-transform duration-300 hover:-translate-y-1"
-              href={`/tags/${t}`}
-            >
-              <span class="bg-primary mr-2 rounded-full px-2 py-1 text-xs font-bold text-white">
-                {t}
-              </span>
-            </a>
-          ))
-        }
-      </div>
+    <div class="w-full py-4">
+      <Content />
+    </div>
+    <div class="border-primary border-t border-b border-dashed py-6 text-start">
+      {
+        tags.map(t => (
+          <a
+            class="bg-primary inline-flex h-[32px] items-center justify-center rounded-[10px] px-3 text-[13px] font-semibold text-white transition-transform duration-300 hover:-translate-y-1"
+            href={`/tags/${t}`}
+          >
+            {t}
+          </a>
+        ))
+      }
+      <ShareLinks />
+    </div>
 
-      <Divider />
-
-      <!-- Previous/Next Post Buttons -->
-      <div data-pagefind-ignore class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
-        {
-          prevPost && (
-            <a
-              href={getPath(prevPost.id, prevPost.filePath)}
-              class="flex w-full gap-1 hover:opacity-75"
-            >
-              <IconChevronLeft class="text-primary-text inline-block flex-none rtl:rotate-180" />
-              <div>
-                <span class="text-primary-text">Previous Post</span>
-                <div class="text-primary text-sm">{prevPost.title}</div>
-              </div>
-            </a>
-          )
-        }
-        {
-          nextPost && (
-            <a
-              href={getPath(nextPost.id, nextPost.filePath)}
-              class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
-            >
-              <div>
-                <span class="text-primary-text">Next Post</span>
-                <div class="text-primary text-sm">{nextPost.title}</div>
-              </div>
-              <IconChevronRight class="text-primary-text inline-block flex-none rtl:rotate-180" />
-            </a>
-          )
-        }
-      </div>
+    <!-- Previous/Next Post Buttons -->
+    <div data-pagefind-ignore class="grid w-full grid-cols-1 gap-6 py-8 sm:grid-cols-2">
+      {
+        prevPost && (
+          <a
+            href={getPath(prevPost.id, prevPost.filePath)}
+            class="flex w-full gap-1 hover:opacity-75"
+          >
+            <IconChevronLeft class="text-primary-text inline-block flex-none rtl:rotate-180" />
+            <div>
+              <span class="text-primary-text">Previous Post</span>
+              <div class="text-primary text-sm">{prevPost.title}</div>
+            </div>
+          </a>
+        )
+      }
+      {
+        nextPost && (
+          <a
+            href={getPath(nextPost.id, nextPost.filePath)}
+            class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
+          >
+            <div>
+              <span class="text-primary-text">Next Post</span>
+              <div class="text-primary text-sm">{nextPost.title}</div>
+            </div>
+            <IconChevronRight class="text-primary-text inline-block flex-none rtl:rotate-180" />
+          </a>
+        )
+      }
     </div>
   </div>
 </Layout>

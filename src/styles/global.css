@@ -63,6 +63,10 @@ h5 {
   @apply font-red-hat-display;
 }
 
+img {
+  @apply m-0;
+}
+
 p {
   @apply m-0;
 }
