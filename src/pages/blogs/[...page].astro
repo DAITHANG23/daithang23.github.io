@@ -19,11 +19,16 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 }
 
 const { page } = Astro.props;
+const backUrl = Astro.url.pathname;
 ---
 
 <Layout title="Blogs | Domcoding" description={SITE.description}>
   <Breadcrumb />
-  <div class="my-10 grid w-full grid-cols-1 gap-8 p-4 md:grid-cols-2">
+  <div
+    class="my-10 grid w-full grid-cols-1 gap-8 p-4 md:grid-cols-2"
+    id="main-content"
+    data-backUrl={backUrl}
+  >
     {
       page.data.map(blog => {
         const { author, description, title, pubDate, updatedDate, heroImage } = blog.data;
@@ -64,3 +69,13 @@ const { page } = Astro.props;
   </div>
   <Pagination {page} />
 </Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const mainContent: HTMLElement | null = document.querySelector("#main-content");
+    const backUrl = mainContent?.dataset?.backurl;
+    if (backUrl) {
+      sessionStorage.setItem("backUrl", backUrl);
+    }
+  });
+</script>

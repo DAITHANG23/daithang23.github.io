@@ -5,11 +5,13 @@ import IconGithub from "@/assets/IconGithub.svg";
 import IconLinkedin from "@/assets/IconLinkedin.svg";
 import IconMail from "@/assets/IconMail.svg";
 import IconFacebooke from "@/assets/IconFacebooke.svg";
+import IconBrandX from "@/assets/IconBrandX.svg";
 import type {
   ListExperiencesType,
   ListTechnologiesType,
   MyProjectType,
   MyServicesType,
+  SocialType,
 } from "./types/common";
 
 export const SITE = {
@@ -302,3 +304,24 @@ export const LIST_EXPERIENCES: Array<ListExperiencesType> = [
       "• Collaborating within a team to develop software product which is Transwap web app. The Transwap app is a product allow users to exchange currency from one country to another country. The app is built using ReactJs, C# .NET, Material-UI and Azure SQL Server, hosted on Azure. ",
   },
 ];
+
+export const SHARE_LINKS: SocialType[] = [
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/sharer.php?u=",
+    linkTitle: `Share this post on Facebook`,
+    icon: IconFacebooke,
+  },
+  {
+    name: "X",
+    href: "https://x.com/intent/post?url=",
+    linkTitle: `Share this post on X`,
+    icon: IconBrandX,
+  },
+  {
+    name: "Mail",
+    href: "mailto:?subject=See%20this%20post&body=",
+    linkTitle: `Share this post via email`,
+    icon: IconMail,
+  },
+] as const;
