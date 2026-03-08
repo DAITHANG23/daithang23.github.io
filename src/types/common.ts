@@ -1,3 +1,5 @@
+import type { Props } from "astro";
+
 export interface TechnologyType {
   title: string;
   image: string;
@@ -30,4 +32,11 @@ export interface ListExperiencesType {
   time: string;
   title: string;
   content: string;
+}
+
+export interface SocialType {
+  name: string;
+  href: string;
+  linkTitle: string;
+  icon: (_props: Props) => Element;
 }
