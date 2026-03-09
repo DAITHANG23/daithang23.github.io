@@ -20,6 +20,7 @@ export const SITE = {
   description: "Welcome to my website!",
   website: "https://daithang23.github.io/",
   timezone: "Asia/Bangkok",
+  scheduledPostMargin: 15 * 60 * 1000,
 };
 
 export const SOCIALS = [
