@@ -4,7 +4,8 @@ import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
-// type Props = CollectionEntry<'blog'>['data'];
+import BackToTopButton from "@/components/BackToTopButton.astro";
+
 export interface Props {
   title: string;
   description: string;
@@ -28,19 +29,10 @@ const { title, description } = Astro.props;
 
   <body class="app-prose !w-full">
     <Header />
+    <BackToTopButton />
     <main>
       <slot />
     </main>
     <Footer />
   </body>
 </html>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const mainContent: HTMLElement | null = document.querySelector("#main-content");
-    const backUrl = mainContent?.dataset?.backurl;
-    if (backUrl) {
-      sessionStorage.setItem("backUrl", backUrl);
-    }
-  });
-</script>

@@ -1,17 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import Breadcrumb from "@/components/Breadcrumb.astro";
 import { SITE } from "@/constants";
 import type { GetStaticPathsOptions } from "astro";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
 import Pagination from "@/components/Pagination.astro";
-import getPath from "@/utils/getPath";
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
+import Main from "@/layouts/Main.astro";
+import Card from "@/components/Card.astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -19,63 +13,17 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 }
 
 const { page } = Astro.props;
-const backUrl = Astro.url.pathname;
 ---
 
 <Layout title="Blogs | Domcoding" description={SITE.description}>
-  <Breadcrumb />
-  <div
-    class="my-10 grid w-full grid-cols-1 gap-8 p-4 md:grid-cols-2"
-    id="main-content"
-    data-backUrl={backUrl}
-  >
-    {
-      page.data.map(blog => {
-        const { author, description, title, pubDate, updatedDate, heroImage } = blog.data;
-        const isModified = updatedDate && updatedDate > pubDate;
-        const datetime = dayjs(isModified ? pubDate : pubDate).tz(SITE.timezone);
-        return (
-          <a href={getPath(blog.id, blog.filePath)} class="block">
-            <div class="flex h-[15rem] min-w-[21rem] cursor-pointer justify-between gap-4 rounded-lg bg-white p-4 shadow-lg transition-transform duration-300 hover:-translate-y-1 dark:bg-[#222a41]">
-              <div class="h-auto w-full md:w-[65%]">
-                <div class="flex justify-between">
-                  <p class="bg-primary rounded p-1 text-center text-xs font-bold text-sky-800 dark:text-pink-700">
-                    {updatedDate ? "Updated" : "Published"}
-                  </p>
-                  <p class="text-xs">{datetime.format("D MMM, YYYY")}</p>
-                </div>
-                <div class="items-between flex h-[90%] flex-col justify-between pt-4">
-                  <div>
-                    <p class="text-sm font-bold">{title}</p>
-                    <p class="pt-4 text-sm">{description}</p>
-                  </div>
-
-                  <p class="text-sm font-semibold">{author}</p>
-                </div>
-              </div>
-
-              <div class="hidden h-full w-[35%] md:block">
-                <img
-                  src={typeof heroImage === "string" ? heroImage : heroImage?.src}
-                  alt={blog.data.title}
-                  class="m-0 h-full w-full rounded-lg object-cover"
-                />
-              </div>
-            </div>
-          </a>
-        );
-      })
-    }
-  </div>
+  <Main pageTitle="Blogs" pageDesc="Check out our latest blog posts!">
+    <div class="my-10 grid w-full grid-cols-1 gap-8 md:grid-cols-2 md:p-4">
+      {
+        page.data.map(blog => {
+          return <Card blog={blog} />;
+        })
+      }
+    </div>
+  </Main>
   <Pagination {page} />
 </Layout>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const mainContent: HTMLElement | null = document.querySelector("#main-content");
-    const backUrl = mainContent?.dataset?.backurl;
-    if (backUrl) {
-      sessionStorage.setItem("backUrl", backUrl);
-    }
-  });
-</script>
