@@ -1,0 +1,46 @@
+---
+import Breadcrumb from "@/components/Breadcrumb.astro";
+
+interface StringTitleProp {
+  pageTitle: string;
+  pageDesc?: string;
+}
+
+interface ArrayTitleProp {
+  pageTitle: [string, string];
+  titleTransition: string;
+  pageDesc?: string;
+}
+
+export type Props = StringTitleProp | ArrayTitleProp;
+
+const { props } = Astro;
+
+const backUrl = Astro.url.pathname;
+---
+
+<Breadcrumb />
+<div class="w-full" id="main-content" data-backUrl={backUrl}>
+  {
+    "titleTransition" in props ? (
+      <h5 class="text-primary-text px-4 py-8 font-bold">
+        {props.pageTitle[0]}:
+        <span transition:name={props.titleTransition}>{props.pageTitle[1]}</span>
+      </h5>
+    ) : (
+      <h5 class="text-primary-text px-4 pt-8 pb-2 font-bold">{props.pageTitle}</h5>
+    )
+  }
+  <p class="text-primary-text px-4 italic">{props.pageDesc}</p>
+  <slot />
+</div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const mainContent: HTMLElement | null = document.querySelector("#main-content");
+    const backUrl = mainContent?.dataset?.backurl;
+    if (backUrl) {
+      sessionStorage.setItem("backUrl", backUrl);
+    }
+  });
+</script>

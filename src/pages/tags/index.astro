@@ -1,5 +1,5 @@
 ---
-import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/layouts/Main.astro";
 import { getCollection } from "astro:content";
 import getUniqueTags from "@/utils/getUniqueTags";
 import Tag from "@/components/Tag.astro";
@@ -11,6 +11,9 @@ const tags = getUniqueTags(posts);
 ---
 
 <Layout title="Tags | Domcoding" description="Browse all tags used in my blog posts">
-  <Breadcrumb />
-  <div>{tags.map(({ tag, tagName }) => <Tag tag={tag} tagName={tagName} />)}</div>
+  <Main pageTitle="Tags" pageDesc="Browse all tags used in my blog posts">
+    <ul>
+      {tags.map(({ tag, tagName }) => <Tag tag={tag} tagName={tagName} />)}
+    </ul>
+  </Main>
 </Layout>
