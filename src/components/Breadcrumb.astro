@@ -1,19 +1,19 @@
 ---
 const pathname = Astro.url.pathname;
+const [first, second] = pathname.split("/").filter(Boolean);
 
-const breadcrumbs = pathname.split("/").filter(Boolean);
+const routes = {
+  blogs: () => (second ? [{ text: `Blogs ( Page ${second} )` }] : [{ text: "Blogs" }]),
+  tags: () => (second ? [{ text: "Tags", href: "/tags" }, { text: second }] : [{ text: "Tags" }]),
+};
 
-let breadcrumbsList: { text: string; href?: string }[] = [];
-
-if (breadcrumbs[0] === "blogs") {
-  breadcrumbsList = [{ text: `Blogs (Page ${breadcrumbs[1]})` }];
-} else if (breadcrumbs[0] === "tags") {
-  breadcrumbsList = [{ text: "Tags", href: "/tags" }, { text: breadcrumbs[1] }];
-}
+let breadcrumbsList: Array<{ text: string; href?: string }> = routes[
+  first as keyof typeof routes
+]?.() ?? [{ text: first }];
 ---
 
 <div class="mt-8">
-  <a href="/" class="text-primary-text underline-offset-4 hover:underline"> Home </a>
+  <a href="/" class="text-primary-text px-0 underline-offset-4 hover:underline"> Home </a>
 
   {
     breadcrumbsList.map((item, index) => {
@@ -24,7 +24,11 @@ if (breadcrumbs[0] === "blogs") {
           <span class="mx-2">/</span>
 
           {isLast ? (
-            <span class="text-primary font-bold capitalize">{item.text}</span>
+            <span
+              class:list={["text-primary font-bold", { capitalize: breadcrumbsList.length < 2 }]}
+            >
+              {item.text}
+            </span>
           ) : (
             <a
               href={item.href}

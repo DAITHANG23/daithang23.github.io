@@ -1,8 +1,12 @@
 ---
+import Layout from "@/layouts/Layout.astro";
 import getPostsByTag from "@/utils/getPostsByTag";
 import getUniqueTags from "@/utils/getUniqueTags";
 import type { GetStaticPathsOptions } from "astro";
 import { getCollection } from "astro:content";
+import Main from "@/layouts/Main.astro";
+import Card from "@/components/Card.astro";
+import Pagination from "@/components/Pagination.astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await getCollection("blog");
@@ -18,8 +22,29 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     });
   });
 }
+
+const params = Astro.params;
+const { tag } = params;
+const { page, tagName } = Astro.props;
 ---
 
-<div>
-  <div></div>
-</div>
+<Layout
+  title={`Tag: ${tagName} | Domcoding`}
+  description="Page is show these articles have contain this tag."
+>
+  <Main
+    pageTitle={["Tag", tagName]}
+    pageDesc={`Browse articles tagged with "${tagName}"`}
+    titleTransition={tagName}
+  >
+    <h1 slot="title" transition:name={tag}>{`Tag:${tag}`}</h1>
+    <div class="my-10 grid w-full grid-cols-1 gap-8 md:grid-cols-2 md:p-4">
+      {
+        page.data.map(blog => {
+          return <Card blog={blog} />;
+        })
+      }
+    </div>
+  </Main>
+  <Pagination {page} />
+</Layout>
