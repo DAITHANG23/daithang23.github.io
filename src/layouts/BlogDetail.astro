@@ -4,10 +4,10 @@ import Layout from "./Layout.astro";
 import { render } from "astro:content";
 import IconChevronLeft from "@/assets/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/IconChevronRight.svg";
-import Divider from "@/components/Divider.astro";
 import BackButton from "@/components/BackButton.astro";
 import getPath from "@/utils/getPath";
 import ShareLinks from "@/components/ShareLinks.astro";
+import PostComments from "@/components/PostComments.astro";
 
 // type Props = CollectionEntry<'blog'>['data'];
 
@@ -96,6 +96,10 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
         )
       }
     </div>
+
+    <!-- Blogs Comments -->
+
+    <PostComments />
   </div>
 </Layout>
 

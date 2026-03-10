@@ -1,0 +1,16 @@
+---
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { getCollection } from "astro:content";
+import getUniqueTags from "@/utils/getUniqueTags";
+import Tag from "@/components/Tag.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+const tags = getUniqueTags(posts);
+---
+
+<Layout title="Tags | Domcoding" description="Browse all tags used in my blog posts">
+  <Breadcrumb />
+  <div>{tags.map(({ tag, tagName }) => <Tag tag={tag} tagName={tagName} />)}</div>
+</Layout>

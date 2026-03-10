@@ -41,6 +41,7 @@ const isActive = (path: string) => {
       >
         <li><a href="/" class:list={{ "active-nav": isActive("/") }}>Home</a></li>
         <li><a href="/blogs" class:list={{ "active-nav": isActive("/blogs") }}>Blogs</a></li>
+        <li><a href="/tags" class:list={{ "active-nav": isActive("/tags") }}>Tags</a></li>
         <li><a href="/about" class:list={{ "active-nav": isActive("/about") }}>About</a></li>
       </ul>
     </div>
@@ -79,6 +80,7 @@ const isActive = (path: string) => {
     >
       <li><a href="/" class:list={{ "active-nav": isActive("/") }}>Home</a></li>
       <li><a href="/blogs" class:list={{ "active-nav": isActive("/blogs") }}>Blogs</a></li>
+      <li><a href="/tags" class:list={{ "active-nav": isActive("/tags") }}>Tags</a></li>
       <li><a href="/about" class:list={{ "active-nav": isActive("/about") }}>About</a></li>
     </ul>
     <div class="relative mx-auto my-0 flex w-[50%] items-center justify-between gap-2">
