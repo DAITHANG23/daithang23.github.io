@@ -1,0 +1,25 @@
+---
+import getPostsByTag from "@/utils/getPostsByTag";
+import getUniqueTags from "@/utils/getUniqueTags";
+import type { GetStaticPathsOptions } from "astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("blog");
+  const tags = getUniqueTags(posts);
+
+  return tags.flatMap(({ tag, tagName }) => {
+    const tagPosts = getPostsByTag(posts, tag);
+
+    return paginate(tagPosts, {
+      params: { tag },
+      props: { tagName },
+      pageSize: 4,
+    });
+  });
+}
+---
+
+<div>
+  <div></div>
+</div>
