@@ -30,7 +30,9 @@ const datetime = dayjs(isModified ? pubDate : pubDate).tz(SITE.timezone);
         </div>
         <div class="items-between flex h-[90%] flex-col justify-between pt-4">
           <div>
-            <p class="text-sm font-bold">{title}</p>
+            <p class="text-sm font-bold" transition:name={title}>
+              {title}
+            </p>
             <p class="pt-4 text-sm">{description}</p>
           </div>
 
