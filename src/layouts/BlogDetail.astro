@@ -43,7 +43,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
         alt={title}
         class="h-full w-full rounded-lg object-cover md:!my-8"
       />
-      <h5 class="absolute top-0 left-0 p-4 text-white">
+      <h5 class="absolute top-0 left-0 p-4 text-white" transition:name={title}>
         {title}
       </h5>
     </div>
