@@ -36,7 +36,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
 
 <Layout title={`${title} | Domcoding`} description={description}>
   <BackButton />
-  <div class="mb-10 w-full p-4">
+  <div class="w-full p-4 md:mb-10">
     <div class="relative mb-8 h-[480px] w-full">
       <img
         src={typeof heroImage === "string" ? heroImage : heroImage?.src}
@@ -66,7 +66,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
     </div>
 
     <!-- Previous/Next Post Buttons -->
-    <div data-pagefind-ignore class="grid w-full grid-cols-1 gap-6 py-8 sm:grid-cols-2">
+    <div data-pagefind-ignore class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
       {
         prevPost && (
           <a

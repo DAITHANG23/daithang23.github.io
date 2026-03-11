@@ -62,7 +62,7 @@ document.addEventListener("astro:before-swap", () => {
     .querySelector("meta[name='theme-color']")
     ?.getAttribute("content");
 
-  event.newDocument.querySelector("meta[name='theme-color']")?.setAttribute("content", bgColor);
+  newDocument.querySelector("meta[name='theme-color']")?.setAttribute("content", bgColor);
 });
 
 window
