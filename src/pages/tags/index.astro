@@ -4,13 +4,14 @@ import { getCollection } from "astro:content";
 import getUniqueTags from "@/utils/getUniqueTags";
 import Tag from "@/components/Tag.astro";
 import Layout from "@/layouts/Layout.astro";
+import { SITE } from "@/constants";
 
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 
 const tags = getUniqueTags(posts);
 ---
 
-<Layout title="Tags | Domcoding" description="Browse all tags used in my blog posts">
+<Layout title=`Tags | ${SITE.title}` description="Browse all tags used in my blog posts">
   <Main pageTitle="Tags" pageDesc="Browse all tags used in my blog posts">
     <ul>
       {tags.map(({ tag, tagName }) => <Tag tag={tag} tagName={tagName} />)}

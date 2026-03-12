@@ -8,6 +8,7 @@ import BackButton from "@/components/BackButton.astro";
 import getPath from "@/utils/getPath";
 import ShareLinks from "@/components/ShareLinks.astro";
 import PostComments from "@/components/PostComments.astro";
+import { SITE } from "@/constants";
 
 // type Props = CollectionEntry<'blog'>['data'];
 
@@ -34,7 +35,7 @@ const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
 const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null;
 ---
 
-<Layout title={`${title} | Domcoding`} description={description}>
+<Layout title={`${title} | ${SITE.title}`} description={description}>
   <BackButton />
   <div class="w-full p-4 md:mb-10" data-pagefind-body>
     <div class="relative mb-8 h-[480px] w-full">
@@ -142,7 +143,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
       const topClass = hasFileNameOffset ? "top-(--file-name-offset)" : "-top-3";
 
       const copyButton = document.createElement("button");
-      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium cursor-pointer`;
       copyButton.innerHTML = copyButtonLabel;
       codeBlock.setAttribute("tabindex", "0");
       codeBlock.appendChild(copyButton);
