@@ -5,7 +5,7 @@ import AvatarAbout from "@/components/AvatarAbout.astro";
 import SocialContact from "@/components/SocialContact.astro";
 import Divider from "@/components/Divider.astro";
 import IconCalendar from "@/assets/IconCalendar.svg";
-import { MY_TECHNOLOGIES, MY_SERVICES, MY_PROJECTS, LIST_EXPERIENCES } from "@/constants";
+import { MY_TECHNOLOGIES, MY_SERVICES, MY_PROJECTS, LIST_EXPERIENCES, SITE } from "@/constants";
 import Tooltip from "@/components/Tooltip.astro";
 import Frontend from "@/assets/IconFrontend.svg";
 import Backend from "@/assets/IconBackend.svg";
@@ -15,7 +15,10 @@ import SectionAboutLayout from "@/layouts/SectionAboutLayout.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 ---
 
-<Layout title="About Me | Domcoding" description="Lorem ipsum dolor sit amet">
+<Layout
+  title={`About Me | ${SITE.title}`}
+  description="This is the about page of my personal blog where I share my experiences, projects, and contact information."
+>
   <Breadcrumb />
 
   <div class="mx-auto my-0 w-full p-4">

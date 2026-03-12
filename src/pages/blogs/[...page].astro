@@ -6,16 +6,17 @@ import type { GetStaticPathsOptions } from "astro";
 import Pagination from "@/components/Pagination.astro";
 import Main from "@/layouts/Main.astro";
 import Card from "@/components/Card.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
-  return paginate(posts, { pageSize: 4 });
+  return paginate(getSortedPosts(posts), { pageSize: 4 });
 }
 
 const { page } = Astro.props;
 ---
 
-<Layout title="Blogs | Domcoding" description={SITE.description}>
+<Layout title={`Blogs | ${SITE.title}`} description={SITE.description}>
   <Main pageTitle="Blogs" pageDesc="Check out our latest blog posts!">
     <div class="my-10 grid w-full grid-cols-1 gap-8 md:grid-cols-2 md:p-4">
       {
