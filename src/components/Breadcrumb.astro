@@ -1,10 +1,15 @@
 ---
 const pathname = Astro.url.pathname;
-const [first, second] = pathname.split("/").filter(Boolean);
+const [first, second, third] = pathname.split("/").filter(Boolean);
 
 const routes = {
-  blogs: () => (second ? [{ text: `Blogs ( Page ${second} )` }] : [{ text: "Blogs" }]),
-  tags: () => (second ? [{ text: "Tags", href: "/tags" }, { text: second }] : [{ text: "Tags" }]),
+  blogs: () => (second ? [{ text: `Blogs (page ${second})` }] : [{ text: "Blogs" }]),
+  tags: () =>
+    third
+      ? [{ text: "Tags", href: "/tags" }, { text: `${second} (page ${third})` }]
+      : second
+        ? [{ text: "Tags", href: "/tags" }, { text: second }]
+        : [{ text: "Tags" }],
 };
 
 let breadcrumbsList: Array<{ text: string; href?: string }> = routes[
@@ -32,7 +37,7 @@ let breadcrumbsList: Array<{ text: string; href?: string }> = routes[
           ) : (
             <a
               href={item.href}
-              class="text-primary font-bold capitalize underline-offset-4 hover:underline"
+              class="text-primary-text capitalize underline-offset-4 hover:underline"
             >
               {item.text}
             </a>

@@ -46,7 +46,12 @@ const isActive = (path: string) => {
       </ul>
     </div>
     <div class="hidden items-center gap-2 sm:flex">
-      <LinkButton href="/search" class="mt-2" id="btn-search"><IconSearch /></LinkButton>
+      <LinkButton
+        href="/search"
+        class="mt-2 transition-transform duration-200 hover:rotate-[15deg]"
+        id="btn-search"
+        ><IconSearch class:list={[{ "text-primary": isActive("/search") }]} /></LinkButton
+      >
       <button
         class="focus-outline hover:text-primary relative mt-1 size-12 transform cursor-pointer rounded-full p-2 hover:rotate-[15deg]"
         id="btn-theme"
