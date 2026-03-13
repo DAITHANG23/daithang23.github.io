@@ -1,62 +1,50 @@
-# Astro Starter Kit: Blog
+# [Thang(Dom) Nguyen's Portfolio Website]
 
-```sh
-npm create astro@latest -- --template blog
-```
+This repository contains my personal portfolio website and knowledge-sharing blog, where I document useful technical knowledge, and experiences related to web development.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+🔗 **Live website**: https://daithang23.github.io/
 
-Features:
+The goal of this project is to create a place to share practical developer knowledge, including configuration guides, deployment tutorials, and useful development tips.
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+## 📌 Features:
 
-## 🚀 Project Structure
+✍️ Technical blog posts
+📚 Knowledge sharing for developers
+⚙️ Configuration guides (DevOps, deployment, tooling)
+👨‍💻 Personal portfolio
+📖 About page introducing my background and experience
+🔎 Static site search
+🧭 Breadcrumb navigation
+📱 Responsive design
+☀️ Light/Dark mode
 
-Inside of your Astro project, you'll see the following folders and files:
+---
 
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+## 🛠 Tech Stack
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+This project is built with modern web technologies:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Languages: Typescript, Javascript
+Framework: Astro
+Styling: TailwindCSS
+Markdown/MDX: Content-based blog system
+Search: Pagefind
+Deployment: GitHub Pages
+Package Manager: pnpm
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+---
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🤝 Contributing
 
-## 🧞 Commands
+This repository mainly serves as my personal portfolio and knowledge base, but suggestions and improvements are always welcome.
 
-All commands are run from the root of the project, from a terminal:
+If you find something useful or have suggestions, feel free to open an issue.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## ⭐ Support
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+If you find this project helpful, consider giving it a ⭐ on GitHub.
 
-## Credit
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+
