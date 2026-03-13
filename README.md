@@ -2,21 +2,21 @@
 
 This repository contains my personal portfolio website and knowledge-sharing blog, where I document useful technical knowledge, and experiences related to web development.
 
-🔗 **Live website**: https://daithang23.github.io/
+🔗 **Live website**: [daithang23.github.io](https://daithang23.github.io/)
 
 The goal of this project is to create a place to share practical developer knowledge, including configuration guides, deployment tutorials, and useful development tips.
 
 ## 📌 Features:
 
-✍️ Technical blog posts
-📚 Knowledge sharing for developers
-⚙️ Configuration guides (DevOps, deployment, tooling)
-👨‍💻 Personal portfolio
-📖 About page introducing my background and experience
-🔎 Static site search
-🧭 Breadcrumb navigation
-📱 Responsive design
-☀️ Light/Dark mode
+- ✍️ Technical blog posts
+- 📚 Knowledge sharing for developers
+- ⚙️ Configuration guides (DevOps, deployment, tooling)
+- 👨‍💻 Personal portfolio
+- 📖 About page introducing my background and experience
+- 🔎 Static site search
+- 🧭 Breadcrumb navigation
+- 📱 Responsive design
+- ☀️ Light/Dark mode
 
 ---
 
@@ -24,13 +24,13 @@ The goal of this project is to create a place to share practical developer knowl
 
 This project is built with modern web technologies:
 
-Languages: Typescript, Javascript
-Framework: Astro
-Styling: TailwindCSS
-Markdown/MDX: Content-based blog system
-Search: Pagefind
-Deployment: GitHub Pages
-Package Manager: pnpm
+- Languages: Typescript, Javascript
+- Framework: Astro
+- Styling: TailwindCSS
+- Markdown/MDX: Content-based blog system
+- Search: Pagefind
+- Deployment: GitHub Pages
+- Package Manager: pnpm
 
 ---
 
