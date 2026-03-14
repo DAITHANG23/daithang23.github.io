@@ -21,6 +21,7 @@ export const SITE = {
   website: "https://daithang23.github.io/",
   timezone: "Asia/Bangkok",
   scheduledPostMargin: 15 * 60 * 1000,
+  ogImage: "favicon.svg",
 };
 
 export const SOCIALS = [
