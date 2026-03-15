@@ -8,32 +8,30 @@ export function initContact() {
   emailjs.init({
     publicKey: publicContactKey,
   });
-  window.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("contact-form");
-    const contactMessage = document.getElementById("contact-message");
 
-    if (!form) return;
+  const form = document.getElementById("contact-form");
+  const contactMessage = document.getElementById("contact-message");
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      emailjs
-        .sendForm(serviceId, templateId, form)
-        .then(() => {
-          contactMessage.textContent = "Message sent successfully!";
-          contactMessage.classList.remove("text-red-500");
-          contactMessage.classList.add("text-green-500");
-          form.reset();
-        })
-        .catch(error => {
-          contactMessage.textContent = "Failed to send message!";
-          contactMessage.classList.remove("text-green-500");
-          contactMessage.classList.add("text-red-500");
-          // eslint-disable-next-line no-console
-          console.error(error);
-        });
-    });
+  if (!form) return;
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    emailjs
+      .sendForm(serviceId, templateId, form)
+      .then(() => {
+        contactMessage.textContent = "Message sent successfully!";
+        contactMessage.classList.remove("text-red-500");
+        contactMessage.classList.add("text-green-500");
+        form.reset();
+      })
+      .catch(error => {
+        contactMessage.textContent = "Failed to send message!";
+        contactMessage.classList.remove("text-green-500");
+        contactMessage.classList.add("text-red-500");
+        // eslint-disable-next-line no-console
+        console.error(error);
+      });
   });
 }
 
-document.addEventListener("DOMContentLoaded", initContact);
 document.addEventListener("astro:after-swap", initContact);
