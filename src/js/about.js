@@ -1,39 +1,4 @@
-import emailjs from "@emailjs/browser";
-
 export function initAbout() {
-  const publicContactKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
-  const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
-  const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
-
-  emailjs.init({
-    publicKey: publicContactKey,
-  });
-  window.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("contact-form");
-    const contactMessage = document.getElementById("contact-message");
-
-    if (!form) return;
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      emailjs
-        .sendForm(serviceId, templateId, form)
-        .then(() => {
-          contactMessage.textContent = "Message sent successfully!";
-          contactMessage.classList.remove("text-red-500");
-          contactMessage.classList.add("text-green-500");
-          form.reset();
-        })
-        .catch(error => {
-          contactMessage.textContent = "Failed to send message!";
-          contactMessage.classList.remove("text-green-500");
-          contactMessage.classList.add("text-red-500");
-          // eslint-disable-next-line no-console
-          console.error(error);
-        });
-    });
-  });
-
   function createProgressBar() {
     if (document.querySelector(".progress-container")) return;
     const progressContainer = document.createElement("div");
